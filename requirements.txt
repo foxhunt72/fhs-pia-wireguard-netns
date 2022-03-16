@@ -1,0 +1,4 @@
+typer[all]
+requests
+wgconfig
+fhs_wireguard_namespace

@@ -1,0 +1,5 @@
+make by cookiecutter
+template: cookiecutter-pypackage-minimal
+version: 0.71 2022-02-20
+usage: cookiecutter gh:foxhunt72/cookiecutter-pypackage-minimal
+
