@@ -62,6 +62,16 @@ Requirements
 - pia account
 - fhs-wireguard-namespace
 
+Todo
+----
+- flake8
+- pytest
+- coverage
+- more docs
+- port forwaring, pia script
+- get_regio, pia script
+
+
 Compatibility
 -------------
 Linux only
