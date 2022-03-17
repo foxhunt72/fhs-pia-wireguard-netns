@@ -56,6 +56,15 @@ build:
 
   python setup.py sdist
 
+# publish package to pypi (build first)
+publish:
+  #!/usr/bin/env sh
+  export PKG_NAME="$(python setup.py --name)"
+  export PKG_VERSION="$(python setup.py --version)"
+  export PKG_FILE="dist/${PKG_NAME}-${PKG_VERSION}.tar.gz"
+  twine upload "$PKG_FILE"
+  # twine upload dist/*
+
 pytest-failure:
   tox -e py310 -- --lf --trace
 
