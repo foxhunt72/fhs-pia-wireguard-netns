@@ -12,49 +12,49 @@ Usage
 -----
 First create a file with the pia credentials (todo password from script)
 
-For example
+For example file: /root/.pia.conf (yaml)::
 
-file: /root/.pia.conf
-```
----
-login:
-  user: <username>
-  password: <pia password>
-```
+  ---
+  login:
+    user: <username>
+    password: <pia password>
 
 Find a vpn server using `get_regio.sh` script in https://github.com/pia-foss/manual-connections.git
 Todo implement this get_regio.sh script in python.
 
+.. code-block:: bash
 
-```
-fhs-pia-wireguard-netns wiin <pia-vpn-server-name> <pia-vpn-server-ip> <namespace-name>
+  fhs-pia-wireguard-netns wiin <pia-vpn-server-name> <pia-vpn-server-ip> <namespace-name>
 
-exammple
+example
 
-fhs-pia-wireguard-netns wiin frankfurt405 212.102.57.8 vpnns
+.. code-block:: bash
+
+  fhs-pia-wireguard-netns wiin frankfurt405 212.102.57.8 vpnns
 
 
 Installation
 ------------
 I would suggest installing this in a seperate venv
 
-```
-python -m venv pia-venv
-source pia-venv/bin/activate
+.. code-block:: bash
 
-# first install fhs-wireguard-namespace as a dependancy
-git clone https://github.com/foxhunt72/fhs-wireguard-namespace.git
-cd fhs-wireguard-namespace
-pip install .
-cd ..
+  python -m venv pia-venv
+  source pia-venv/bin/activate
 
-git clone https://github.com/foxhunt72/fhs-pia-wireguard-netns.git
-cd fhs-pia-wireguard-netns
-pip install .
-```
+  # first install fhs-wireguard-namespace as a dependancy
+  git clone https://github.com/foxhunt72/fhs-wireguard-namespace.git
+  cd fhs-wireguard-namespace
+  pip install .
+  cd ..
+
+  git clone https://github.com/foxhunt72/fhs-pia-wireguard-netns.git
+  cd fhs-pia-wireguard-netns
+  pip install .
 
 Requirements
 ^^^^^^^^^^^^
+- `fhs-wireguard-namespace <https://github.com/foxhunt72/fhs-wireguard-namespace>`_
 - curl
 - ip
 - wireguard
