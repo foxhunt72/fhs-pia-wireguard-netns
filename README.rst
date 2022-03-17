@@ -80,6 +80,11 @@ Licence
 -------
 MIT License
 
+Changelog
+---------
+- 0.1.0 initial version
+- 0.1.1 fix pyyaml dependancy
+
 Authors
 -------
 
