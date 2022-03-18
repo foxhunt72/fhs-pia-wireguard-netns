@@ -85,6 +85,7 @@ Changelog
 - 0.1.0 initial version
 - 0.1.1 fix pyyaml dependancy
 - 0.1.2 data not included in installed package (cacert missing)
+- 0.1.3 cacert still missing, fixed with a packagedata command in setup.py
 
 Authors
 -------

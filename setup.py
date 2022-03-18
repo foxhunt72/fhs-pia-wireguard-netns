@@ -46,7 +46,7 @@ setup(
         )
     ),
     package_dir={"": "src"},
-    package_data={"": ["src/fhs_pia_wireguard_netns/pia_class/data/*"]},
+    package_data={"fhs_pia_wireguard_netns": ["pia_class/data/*"]},
     install_requires=REQUIREMENTS,
     classifiers=[
         "Development Status :: 4 - Beta",

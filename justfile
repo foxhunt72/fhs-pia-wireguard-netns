@@ -6,19 +6,18 @@
 default:
   @just -l
 
-setuptest directory="/tmp/venv":
-  #!/usr/bin/env sh
-  python -m venv "{{directory}}"
-  "{{directory}}/bin/pip3" install -e .
-  echo "use: source {{directory}}/bin/active to test with python"
-
-
 setuptest-dev directory="/tmp/venv":
   #!/usr/bin/env sh
   python -m venv "{{directory}}"
   "{{directory}}/bin/pip3" install -e .
   "{{directory}}/bin/pip3" install -r requirements-dev.txt
   "{{directory}}/bin/pip3" install -r requirements-flake8.txt
+  echo "use: source {{directory}}/bin/active to test with python"
+
+setuptest directory="/tmp/venv2":
+  #!/usr/bin/env sh
+  python -m venv "{{directory}}"
+  "{{directory}}/bin/pip3" install .
   echo "use: source {{directory}}/bin/active to test with python"
 
 githook:
