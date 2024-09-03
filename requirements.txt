@@ -3,3 +3,4 @@ requests
 wgconfig
 fhs_wireguard_namespace
 pyyaml
+setuptools

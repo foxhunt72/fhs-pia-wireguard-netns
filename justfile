@@ -41,19 +41,40 @@ build:
   export PKG_NAME="$(python setup.py --name)"
   export PKG_VERSION="$(python setup.py --version)"
   export PKG_FILE="dist/${PKG_NAME}-${PKG_VERSION}.tar.gz"
+  if ! grep "^- ${PKG_VERSION}:" "CHANGELOG.md"; then
+    echo "Missing: - ${PKG_VERSION}: in CHANGELOG.md"
+    exit 1
+  fi
+
+  # if the package allready exists then just stop
   echo ">>$PKG_FILE<<"
   if test -f "$PKG_FILE"; then
    echo "$PKG_FILE allready exists..."
    exit 1
   fi
 
-  echo "continue"
+  # make sure that everything is pushed to git before building
+  if ! git status | grep -q 'working tree clean'; then
+    echo "please commit all changes first in git."
+    git status
+    exit 1
+  fi
+
+  echo "checking code using tox before building."
   if ! tox -p; then
     echo "tox error."
     exit 1
   fi
 
-  python setup.py sdist
+  # build and add git tab
+  python setup.py sdist || exit 1
+  if ! twine check "$PKG_FILE"; then
+    rm "$PKG_FILE"
+    exit 1
+  fi
+
+  git tag "v${PKG_VERSION}" HEAD && git push -u origin --tags
+
 
 # publish package to pypi (build first)
 publish:
@@ -61,9 +82,20 @@ publish:
   export PKG_NAME="$(python setup.py --name)"
   export PKG_VERSION="$(python setup.py --version)"
   export PKG_FILE="dist/${PKG_NAME}-${PKG_VERSION}.tar.gz"
-  twine upload "$PKG_FILE"
+  twine upload -r pypi "$PKG_FILE" && gh release create "v${PKG_VERSION}" "$PKG_FILE" -F CHANGELOG.md
   # twine upload dist/*
 
 pytest-failure:
   tox -e py310 -- --lf --trace
+
+# bump version number
+bumppatch:
+  #!/usr/bin/env sh
+  bumpversion --allow-dirty --verbose patch
+  vi CHANGELOG.md
+
+# edit README.rst
+readme:
+  #!/usr/bin/env sh
+  formiko README.rst
 

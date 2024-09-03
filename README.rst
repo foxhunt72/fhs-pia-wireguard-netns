@@ -1,6 +1,16 @@
 fhs_pia_wireguard_netns
 =======================
 
+Version
+-------
+
+0.1.5
+
+For changes see changelog_
+
+.. _changelog: https://github.com/foxhunt72/fhs-pia-wireguard-netns/blob/main/CHANGELOG.md
+
+
 With this program you can create a pia vpn configuration in a namespace so that the program in the namespace only
 has a internet connection by the vpn.
 
@@ -22,6 +32,14 @@ For example file: /root/.pia.conf (yaml)::
 Find a vpn server using `get_regio.sh` script in https://github.com/pia-foss/manual-connections.git
 Todo implement this get_regio.sh script in python.
 
+Or check something like
+
+.. code-block:: bash
+
+  curl "https://serverlist.piaservers.net/vpninfo/servers/v6" | jq . | less
+
+Then run like
+
 .. code-block:: bash
 
   fhs-pia-wireguard-netns wiin <pia-vpn-server-name> <pia-vpn-server-ip> <namespace-name>
@@ -41,6 +59,10 @@ I would suggest installing this in a seperate venv
 
   python -m venv pia-venv
   source pia-venv/bin/activate
+
+  pip install fhs-pia-wireguard-netns
+
+  # or using github
 
   # first install fhs-wireguard-namespace as a dependancy
   git clone https://github.com/foxhunt72/fhs-wireguard-namespace.git
