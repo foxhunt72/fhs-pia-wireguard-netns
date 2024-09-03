@@ -38,9 +38,9 @@ clean:
 # build python package
 build:
   #!/usr/bin/env sh
-  export PKG_NAME="$(python setup.py --name)"
+  export PKG_NAME="$(python setup.py --name | tr "-" "_")"
   export PKG_VERSION="$(python setup.py --version)"
-  export PKG_FILE="dist/${PKG_NAME}-${PKG_VERSION}.tar.gz"
+  export PKG_FILE="dist/${PKG_NAME}_${PKG_VERSION}.tar.gz"
   if ! grep "^- ${PKG_VERSION}:" "CHANGELOG.md"; then
     echo "Missing: - ${PKG_VERSION}: in CHANGELOG.md"
     exit 1
